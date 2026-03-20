@@ -1,0 +1,72 @@
+# fastlane/Fastfile
+default_platform(:ios)
+
+platform :ios do
+
+  before_all do
+    setup_ci if ENV['CI']
+  end
+
+  desc "Fetch certificates and profiles via Match"
+  lane :certificates do
+    match(
+      type: "appstore",
+      app_identifier: ["app.nucleus", "app.nucleus.staging"],
+      git_url: ENV["MATCH_GIT_URL"],
+      password: ENV["MATCH_PASSWORD"],
+      readonly: is_ci
+    )
+  end
+
+  desc "Build and push to TestFlight (staging)"
+  lane :beta do
+    certificates
+
+    increment_build_number(
+      build_number: latest_testflight_build_number + 1,
+      xcodeproj: "Runner.xcodeproj"
+    )
+
+    build_app(
+      scheme: "nucleus-staging",
+      workspace: "Runner.xcworkspace",
+      configuration: "Release-staging",
+      export_method: "app-store",
+      export_options: {
+        provisioningProfiles: {
+          "app.nucleus.staging" => "match AppStore app.nucleus.staging"
+        }
+      }
+    )
+
+    upload_to_testflight(
+      api_key_path: "fastlane/api_key.json",
+      distribute_external: false,
+      notify_external_testers: false,
+      changelog: "Automated build from CI — #{ENV['GITHUB_SHA']}"
+    )
+  end
+
+  desc "Build and submit to App Store (production)"
+  lane :release do
+    certificates
+
+    build_app(
+      scheme: "nucleus-production",
+      workspace: "Runner.xcworkspace",
+      configuration: "Release-production",
+      export_method: "app-store",
+      export_options: {
+        provisioningProfiles: {
+          "app.nucleus" => "match AppStore app.nucleus"
+        }
+      }
+    )
+
+    deliver(
+      submit_for_review: false,
+      force: true,
+      metadata_path: "fastlane/metadata"
+    )
+  end
+end

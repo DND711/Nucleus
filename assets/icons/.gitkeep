@@ -1,0 +1,11 @@
+# SVG icon files go here.
+# icon_voice.svg    — Microphone / waveform icon
+# icon_spark.svg    — Lightning bolt / spark icon
+# icon_moment.svg   — Visual card / moment icon
+# icon_vibe.svg     — Mood / vibe indicator icon
+# icon_orbit.svg    — Orbit / radar icon
+# icon_credits.svg  — Credit bolt icon
+# icon_verified.svg — Blue verification tick icon
+# icon_backstage.svg — Backstage portal icon
+#
+# Format: SVG, 24×24 viewBox, single colour path (tinted at runtime)

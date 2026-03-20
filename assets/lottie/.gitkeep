@@ -1,0 +1,13 @@
+# Lottie animation JSON files go here.
+# Required files:
+#   sticker_burst.json    — Particle burst on sticker tap (8 emoji, 0.5s, 60fps)
+#   orbit_ring.json       — Orbit ring pulse animation
+#   empty_state.json      — Empty feed / no results illustration
+#   success_check.json    — Payment / verification success checkmark
+#   tip_sent.json         — Tip sent celebration animation
+#   orbit_confirmed.json  — Orbit mutual pull confirmed animation
+#   voice_recording.json  — Live waveform recording animation
+#   call_connecting.json  — Call connecting spinner animation
+#
+# Export from After Effects using the Bodymovin plugin.
+# Target: 60fps, dimensions 400×400px, transparent background.

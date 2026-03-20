@@ -129,3 +129,5 @@ fastlane/api_key.json
 .env.*
 secrets/
 firebase_options_prod.dart
+backend/node_modules/
+backend/.env

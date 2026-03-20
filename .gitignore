@@ -117,3 +117,15 @@ app.*.symbols
 !**/ios/**/default.perspectivev3
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 !/dev/ci/**/Gemfile.lock
+# Nucleus-specific
+*.g.dart
+*.freezed.dart
+*.mocks.dart
+google-services.json
+GoogleService-Info.plist
+key.properties
+fastlane/api_key.json
+.env
+.env.*
+secrets/
+firebase_options_prod.dart
